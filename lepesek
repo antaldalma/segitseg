@@ -1,0 +1,56 @@
+Hálókártya konfiguráció: LSMOD
+  rm /etc/udev/rules.d/70-*tab*
+  reboot
+
+PROXMOX
+  bootolásnál: F12
+  
+  pve -> updates -> ret resk -> upgrade
+  
+  local pve -> counted -> Templates:  Ubuntu 16.04
+                                      Debian 8.0
+                                      Alpine 3.3
+  
+  datacenter -> pools -> create
+  
+  Create CT
+    network: 10.77.SSD(1).100/8
+    gateway: 10.0.0.200
+
+WWW
+  pve -> 100(www) -> start
+   update, upgrade, apache2, git
+   
+   html: 
+    cd../
+    cd var/ww/html
+    git clone https://github.com/antaldalma/mappanév.git
+    cd mappanév
+    mv filenév /var/www/html
+    
+    belépés: https://10.77.1.100
+   
+SSH
+  ssh sis@10.0.9.11
+  scp w *tab* 10.0.9.x: /home/sis/
+  scp v *tab* -||-
+  
+FTP
+  Create CT
+    név: ftp
+    templates: ubuntu 16.04
+    ip: 10.77.SSD(1).200/8
+    gateway: 10.0.0.200/10.77.1.100
+    
+  -> start -> console
+    git pull ftp.sh
+    adduser *felhasználó* (3 db)
+    cd ..
+    cd home
+    cd *felhasználó*
+    touch akármi
+    echo mekmek >> akármi
+    
+  belépés: ftp://10.77.1.200
+    
+   
